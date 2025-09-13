@@ -7,11 +7,14 @@ public abstract class BaseEnemy : MonoBehaviour
 {
     protected Animator animator;
     protected Health health;
+    [SerializeField] protected AudioSource audioSource;
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
+        
+        if (!audioSource) audioSource = GetComponentInChildren<AudioSource>();
 
         health.OnHurt += PlayHurtAnim;
         health.OnDead += HandleDeath;
